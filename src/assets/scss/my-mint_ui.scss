@@ -1,0 +1,57 @@
+$color-primary: #6ea8f7;
+$color_F2F0E1: #F2F0E1;
+.mintui {
+  font-size: 0.53333rem;
+}
+.mint-header {
+  height: 90px;
+  background-color: $color-primary;
+  font-size: 32px;
+}
+
+//title文字
+.mint-header-title {
+  padding: 3px;
+}
+
+.mint-navbar .mint-tab-item.is-selected {
+  border-bottom: 1.5px solid $color-primary;
+  color: $color-primary;
+}
+.mint-tab-item-label{
+  font-size: 26px;
+}
+
+//底部按钮切换
+.mint-tabbar > .mint-tab-item.is-selected {
+  color: $color-primary;
+}
+
+//tab 未选中字体颜色
+.mint-tab-item {
+  color: #666666;
+}
+
+//修改方式可以在依赖库中找到样式的id
+//对话框
+.mint-msgbox {
+  border-radius: 10px;
+}
+
+.mint-msgbox-message {
+  font-size: 30px;
+}
+
+//对话框确定按钮
+.mint-msgbox-confirm {
+  color: $color-primary;
+  font-size: 26px;
+}
+
+//选项卡
+.mint-navbar {
+  background-color: $color_F2F0E1;
+}
+.mint-button-icon{
+  height: 40px;
+}
