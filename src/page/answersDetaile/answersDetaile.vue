@@ -88,9 +88,9 @@
                 this.LoadingUtils.showLoading('加载中');
                 this.$Api.getAnswerDetails(params).then(data => {
                     if(data.relevant.length>0){
-                        for (let i = 0; i < data.relevant.length; i++) {
-                            this.answerObj.relevant.push(data.relevant[i])
-                        }
+                        data.relevant.forEach((item)=>{
+                            this.answerObj.relevant.push(item)
+                        })
                         this.loading = false;
                     }else{
                         this.on_off = true

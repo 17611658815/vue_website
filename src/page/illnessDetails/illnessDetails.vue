@@ -133,9 +133,9 @@
                         this.sliceAttr = data.illness.attr.slice(0, 5)
                     }else{
                         if(data[this.contype[currentTab]].length>0){
-                            for(let i = 0 ; i < data[this.contype[currentTab]].length;i++){
-                                this.Gdata[this.contype[currentTab]].push(data[this.contype[currentTab]][i])
-                            }
+                            data[this.contype[currentTab]].forEach((val) => {
+                                this.Gdata[this.contype[currentTab]].push(val)
+                            })
                             this.loading = false
                         }else{
                             this.on_off = true //开启开关
@@ -197,13 +197,11 @@
 
 <style scoped lang="scss">
     @import '@/assets/scss/color.scss';
-    .illnessPage{
-        width: 100%;
-        min-height: 100vh;
-    }
+    // .illnessPage{
+    //     width: 100%;
+    // }
     .van-list{
         width: 100%;
-        height: 100%;
     }
     .headerBox{
         width: 100%;

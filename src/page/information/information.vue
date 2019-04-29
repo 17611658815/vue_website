@@ -1,11 +1,10 @@
 <template>
     <div>
-        <!-- <herder-title :title="title"></herder-title> -->
         <!-- 头像信息 -->
         <div class='headerUserinfo'>
             <div class='userInfobox'>
                 <div class='userinfo'>
-                    <img src="@/assets/images/mfk.png">
+                    <img src="@/assets/images/mfk.png"> 
                     <div class="userinfo_item">
                         <p>五年</p>
                         <p>{{phone}}</p>
@@ -77,7 +76,6 @@
                     },1000)
                    
                 },4000)
-                
             }, 
         },
         created() {

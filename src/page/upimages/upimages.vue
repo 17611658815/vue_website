@@ -33,7 +33,6 @@
         <div class="submit" @click="bindtap_upload">
                  上传
         </div>
-
     </div>
 </template>
 
@@ -110,13 +109,12 @@
 <style scoped lang="scss">
     @import '@/assets/scss/color.scss';
     img{
-        height: 120px;
-        width: 120px
+        height: 110px;
+        width: 110px
     }
     .image_upload{ 
         height: 120px; 
         width: 120px;
-        /* background: red */
         background-image: url('../../assets/images/add.png');
         background-size:100% 100%;
     }
@@ -131,7 +129,7 @@
         right: 0;
         top: 0;
         background: yellow;
-        z-index: 9999;
+        z-index: 9;
     }
     .textareaBox{
         width: 100%;

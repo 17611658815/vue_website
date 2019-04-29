@@ -2,7 +2,7 @@
     <div class="alldiseasePage">
         <herder-title :title="title" :isback='true'></herder-title>
         <!-- <ul>
-			<li v-for="(item,index) in stairillnessList" :key="item.id">
+            <li v-for="(item,index) in stairillnessList" :key="item.id">
 				<div @click="_isFold(item.id,index)">
 					<span :class="item.id==ksid  ? 'active':''">{{item.name}}</span>
 				<img v-if='item.id==ksid && isUp' src="@/assets/images/icon_14.png"/>
@@ -15,12 +15,12 @@
 		</ul> -->
         <van-collapse  @change='_isFold(item.id,index)' v-for="(item,index) in stairillnessList" :key="item.id" v-model="activeName" accordion>
             <van-collapse-item  :title-class="activeName == item.id ? 'active':'' " :title="item.name" :name="item.id">
-                  <div class="collapse-item">
-                      <span v-for='(item,index) in secondillnessList' @click="goillnessDetails(item.id,item.name)" :key="item.id">{{item.name}}</span>
-                 </div>
+                    <div class="collapse-item">
+                        <span v-for='(item,index) in secondillnessList' @click="goillnessDetails(item.id,item.name)" :key="item.id">{{item.name}}</span>
+                    </div>
             </van-collapse-item>
         </van-collapse>
-    </div>
+        </div>
 </template>
 <script type="text/ecmascript-6">
     export default {
@@ -45,16 +45,16 @@
                 this.$Api.getAllillness(params).then(data => {
                     this.stairillnessList = data;//全部科室疾病
                     this.secondillnessList = data[0].son;//默认展示首个科室疾病
-                    for(var i = 0; i < this.stairillnessList.length;i++){
-                        if(this.stairillnessList[i].son == undefined){
-                            this.stairillnessList[i].son=[
+                    this.stairillnessList.forEach((_item) => {
+                          if(_item.son == undefined){
+                            _item.son=[
                                 {
-                                    name: this.stairillnessList[i].name + "全科",
-                                    id: this.stairillnessList[i].id
+                                    name: _item.name + "全科",
+                                    id: _item.id
                                 }
                             ]
                         }
-                    }
+                    })
                     this.LogUtils.log(data)
                     this.LoadingUtils.hideLoading();
                 })

@@ -41,9 +41,9 @@
                         this.inllnessList = data.illness
                     }
                     if(data.list.length>0){
-                        for(let i = 0 ; i < data.list.length;i++){
-                            this.articleList.push(data.list[i])
-                        }
+                        data.list.forEach((val) => {
+                            this.articleList.push(val)
+                        })
                         this.loading = false;
                     }else{
                         this.on_off = true

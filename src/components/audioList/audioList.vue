@@ -1,5 +1,5 @@
 <template>
-    <div class="audioPage">
+    <div class="audioPage" v-if='audioList.length>0'>
        <div class='audioContainer' @click="goaudioDetails(item.id,item.title)" v-for='(item,index) in audioList' :key="item.id">
             <div class='recommendation' v-if='isSelf && index==0'>
                 相关音频
@@ -32,8 +32,10 @@
             </div>
         </div>
     </div>
+    <div class="audioPage" v-else>
+        没数据
+    </div>
 </template>
-
 <script type="text/ecmascript-6">
     export default {
         data() {
@@ -54,10 +56,9 @@
                 this.$emit("changeIds",param)
             },
             goaudioDetails(id,title){
-                let param = {
-                    id:id,
-                    title:title,
-                }
+                let param = new Object();
+                    param.id = id;
+                    param.title = title;
                 if(this.isSelf){
                     this.changeId(param)
                 }else{
@@ -146,5 +147,5 @@
         align-items: center;
         vertical-align: middle;
     }
-
+   
 </style>

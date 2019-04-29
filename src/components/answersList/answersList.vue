@@ -36,10 +36,9 @@
                 this.$emit("changeIds",param)
             },
             goanswersDetails(id,title){
-                let param = {
-                    id:id,
-                    title:title,
-                }
+                let param = new Object();
+                    param.id = id;
+                    param.title = title;
                 if(this.isSelf){
                     this.changeId(param)
                 }else{

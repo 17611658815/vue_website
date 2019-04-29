@@ -12,7 +12,6 @@
                 </div>
             </div>
             <article-module :articleList='articleObj.relevant' @changeIds="upPageid" :isSelf='true'></article-module>
-            <!-- <div class='bottomTost' v-if='on_off'>到底了~</div> -->
         </van-list>
     </div>
 </template>
@@ -90,9 +89,9 @@
                 this.LoadingUtils.showLoading('加载中');
                 this.$Api.getArticleDetails(params).then(data => {
                     if(data.relevant.length>0){
-                        for (let i = 0; i < data.relevant.length; i++) {
-                            this.articleObj.relevant.push(data.relevant[i])
-                        }
+                        data.relevant.forEach((item)=>{
+                            this.articleObj.relevant.push(item)
+                        })
                         this.loading = false;
                     }else{
                         this.on_off = true

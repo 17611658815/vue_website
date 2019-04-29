@@ -104,9 +104,9 @@
                 this.LoadingUtils.showLoading('加载中');
                 this.$Api.getVideoDetails(params).then(data => {
                     if(data.relevant.length>0){
-                        for (let i = 0; i < data.relevant.length; i++) {
-                            this.videoObj.relevant.push(data.relevant[i])
-                        }
+                        data.relevant.forEach((val) => {
+                            this.videoObj.relevant.push(val)
+                        })
                         this.loading = false;
                     }else{
                         this.on_off = true

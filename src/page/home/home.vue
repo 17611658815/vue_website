@@ -35,8 +35,6 @@
 </template>
 
 <script>
-    // import { Swipe, SwipeItem } from 'mint-ui';
-    import { Button } from 'vant'
     export default {
         name: 'home',
         data () {
@@ -75,7 +73,6 @@
             this.getHotIllnessList()
         },
         components:{
-            // [Button.name]: Button 
         },
         methods: {
             //获取主页视频
@@ -85,12 +82,12 @@
                 this.LoadingUtils.showLoading('加载中');
                 this.$Api.getHomeVideoList(params).then(data => {
                     if(data.list.length > 0){
-                        for(var i = 0 ; i < data.list.length ; i++){
-                            this.videoList.push(data.list[i])
-                        }
+                        data.list.forEach((val) => {
+                            this.videoList.push(val)
+                        })
                         this.loading = false;
                     }else{
-                        this.on_off = true
+                        this.on_off = true;
                     }
                     this.LoadingUtils.hideLoading();
                 })

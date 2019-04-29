@@ -4,9 +4,9 @@
 			<herder-title :title="audioObj.yinpin.title" :isback='true'></herder-title>
 			<div class="headerContainer">
 				 <div class="titleTxt">
-                    <div>{{audioObj.yinpin.title}}</div>
-                    <div>{{audioObj.yinpin.created}}</div>
-                    <doctor-info :docinfo='audioObj.doctor'></doctor-info>
+					<div>{{audioObj.yinpin.title}}</div>
+					<div>{{audioObj.yinpin.created}}</div>
+					<doctor-info :docinfo='audioObj.doctor'></doctor-info>
 					<div class="ofplayBox">
 						<!-- audio播放组件 -->
 						<audio 
@@ -44,45 +44,45 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import doctorInfo from "@/components/doctorInfo/doctorInfo";
-    export default {
-        name:'audioDetails',
-        data() {
-            return {
-                audioObj:{
-                    yinpin:{},
-                    doctor:{},
-                    relevant:[]
-                },
-                id:'',
-                page:1,
-                on_off:false,
+		import doctorInfo from "@/components/doctorInfo/doctorInfo";
+		export default {
+		name:'audioDetails',
+		data() {
+			return {
+				audioObj:{
+					yinpin:{},
+					doctor:{},
+					relevant:[]
+				},
+				id:'',
+				page:1,
+				on_off:false,
 				loading:false,
 				playflg: false,//当前是否正在播放
 				rangeValue: 0,//滑块进度条
 				starttime: '00:00', //正在播放时长
 				duration: '', //总时长
 				offset: 0,
-            }
-        },
-        activated () {
+			}
+		},
+		activated () {
 			this.id = this.$route.query.data.id;
 			this.getAudioDetailsList();
-            this.LogUtils.log(this.$route.query.data);
-        },
-        watch: {
-            id(val){
-                /**
-                 * 监听id变化 重新加载页面
-                 * 初始化时数据
-                 * */ 
-                console.log('监听')
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop = 0;
-                this.page = 1;
-                this.on_off = false; 
-                this.audioObj.yinpin = {};
-                this.audioObj.doctor = {};
+			this.LogUtils.log(this.$route.query.data);
+		},
+		watch: {
+			id(val){
+				/**
+				 * 监听id变化 重新加载页面
+				 * 初始化时数据
+				 * */ 
+				console.log('监听')
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
+				this.page = 1;
+				this.on_off = false; 
+				this.audioObj.yinpin = {};
+				this.audioObj.doctor = {};
 				this.audioObj.relevant = [];
 				this.playflg = false;//当前是否正在播放
 				this.rangeValue = null;//滑块进度条
@@ -90,50 +90,50 @@
 				this.duration = ''; //总时长
 				this.offset = 0;
 				this.stop(); //关闭播放音频
-                this.getAudioDetailsList();
-            },
-            immediate: true
-        },
-        methods: {
+				this.getAudioDetailsList();
+			},
+			immediate: true
+		},
+		methods: {
 			// 获取视频信息
-            getAudioDetailsList(){
-                let params = new Object();
-                params.id = this.id;
-                this.LoadingUtils.showLoading('加载中');
-                this.$Api.getAudioDetails(params).then(data => {
+			getAudioDetailsList(){
+				let params = new Object();
+				params.id = this.id;
+				this.LoadingUtils.showLoading('加载中');
+				this.$Api.getAudioDetails(params).then(data => {
 					this.audioObj = data;
 					this.LogUtils.log(this.audioObj);
-                    this.LoadingUtils.hideLoading();
-                })
-            },
-            // 接收子组件参数
-            upPageid(e){
-                this.title = e.title;
-                this.id  = e.id;
-            },
-            onReachBottom(){
-                let params = new Object();
-                if(this.on_off){
-                    return
-                }
-                this.loading = true;
-                this.page++;
-                params.id = this.id;
-                params.page = this.page;
-                this.LoadingUtils.showLoading('加载中');
-                this.$Api.getAudioDetails(params).then(data => {
-                    if(data.relevant.length>0){
-                        for (let i = 0; i < data.relevant.length; i++) {
-                            this.audioObj.relevant.push(data.relevant[i])
-                        }
-                        this.loading = false;
-                    }else{
-                        this.on_off = true
-                    }
-                    this.LoadingUtils.hideLoading();
-                })
-            },
-            //开始播放
+					this.LoadingUtils.hideLoading();
+				})
+			},
+			// 接收子组件参数
+			upPageid(e){
+				this.title = e.title;
+				this.id  = e.id;
+			},
+			onReachBottom(){
+				let params = new Object();
+				if(this.on_off){
+					return
+				}
+				this.loading = true;
+				this.page++;
+				params.id = this.id;
+				params.page = this.page;
+				this.LoadingUtils.showLoading('加载中');
+				this.$Api.getAudioDetails(params).then(data => {
+					if(data.relevant.length>0){
+						data.relevant.forEach((item)=>{
+                            this.audioObj.relevant.push(item)
+                        })
+						this.loading = false;
+					}else{
+						this.on_off = true
+					}
+					this.LoadingUtils.hideLoading();
+				})
+			},
+			//开始播放
 			play() {
 				this.LoadingUtils.showLoading('加载中');
 				this.$refs.audio.play();
@@ -146,9 +146,9 @@
 						var min = "0" + parseInt(this.$refs.audio.currentTime / 60);//音频播放当前时间
 						var max = parseInt(this.$refs.audio.duration);//音频总时长
 						var sec = parseInt(this.$refs.audio.currentTime % 60);
-					    if (sec < 10) {
-					      sec = "0" + sec;
-					    };
+						if (sec < 10) {
+							sec = "0" + sec;
+						};
 						this.starttime = min + ':' + sec;   /*  00:00  */
 						this.rangeValue = parseInt(this.$refs.audio.currentTime)
 						if(this.rangeValue >= this.offset) {
@@ -160,36 +160,36 @@
 					}, 1000)
 				}
  
-            },
-          
-            //暂停-结束
+			},
+		
+			//暂停-结束
 			stop() {
 				this.$refs.audio.pause();
 				this.playflg = false
 				this.LogUtils.log('暂停播放')
-            },
-            onTimeupdate(e) {
+			},
+			onTimeupdate(e) {
 				if(e){
 					this.LoadingUtils.hideLoading();
 				}
 			},
 			
 			// 拖拽进度
-            changeEvent(val){
+			changeEvent(val){	
 				this.$refs.audio.currentTime = val
-            },
-            inputEvent(e){
-                // console.log(e)
-            }
+			},
+			inputEvent(e){
+				// console.log(e)
+			}
 		},
 		//页面卸载时 清除定时器
 		beforeDestroy() {
 			clearInterval(this.timer)
 		},
-        components: {
+		components: {
 			'doctor-info':doctorInfo
-        }
-    }
+		}
+	}
 </script>
 
 <style scoped lang="scss">
@@ -198,30 +198,30 @@
 		min-height: 100vh;
 	}
 	.headerContainer{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: #ffffff;
-        margin-bottom: 20px;
-    }
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background: #ffffff;
+		margin-bottom: 20px;
+	}
 	.titleTxt{
-        width: 92%;
-        padding: 36px 0 50px 0;
-    }
+		width: 92%;
+		padding: 36px 0 50px 0;
+	}
 	.titleTxt>div:nth-child(1){
-        font-size:36px;
-        color:#000000;
-        margin-bottom:10px;
+		font-size:36px;
+		color:#000000;
+		margin-bottom:10px;
 
-    }
-    .titleTxt>div:nth-child(2){
-        padding: 20px 0 40px 0;
-        font-size:26px;
-        color:#999999;
-        border-bottom:1px solid #e2e2e2;
-    }
+	}
+	.titleTxt>div:nth-child(2){
+		padding: 20px 0 40px 0;
+		font-size:26px;
+		color:#999999;
+		border-bottom:1px solid #e2e2e2;
+	}
 	.audioOff {
 		width: 100%;
 		padding: 0.4rem 0;
@@ -229,7 +229,7 @@
 		justify-content: center;
 		align-items: center;
 	}
-	
+
 	.ofplayBox {
 		width: 100%;
 		height: 1.5rem;
@@ -237,7 +237,7 @@
 		display: flex;
 		border-radius: 0.1rem;
 	}
-	
+
 	.isPlayImg {
 		width: 1rem;
 		height: 100%;
@@ -246,7 +246,7 @@
 		align-items: center;
 		padding-left: 10px;
 	}
-	
+
 	.isPlayImg img {
 		width: 0.9rem;
 		height: 0.9rem;
@@ -276,11 +276,11 @@
 		box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
 		z-index: 999;
 	}
-	
+
 	.duration {
-        height: 50px;
+		height: 50px;
 		display: flex;
-        align-items: center;
+		align-items: center;
 		justify-content: space-between;
 	}
 	.audioMsg{
@@ -290,10 +290,10 @@
 	}
 	.audioText{
 		font-size: 0.373333rem;
-        color: #666666;
-        text-indent: 2em;
-        line-height: 1.8;
-        letter-spacing: 0.013333rem;
-        padding-bottom: 0.666667rem;
+		color: #666666;
+		text-indent: 2em;
+		line-height: 1.8;
+		letter-spacing: 0.013333rem;
+		padding-bottom: 0.666667rem;
 	}
 </style>
