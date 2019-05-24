@@ -65,6 +65,7 @@ export default {
 	},
 	methods: {
 		//转换时间格式
+
 		getdata(){
 			let arr = data.data;
 			this.audioList = arr.map(item => {
@@ -75,6 +76,7 @@ export default {
 		onTimeupdate(e) {
 			if (e) {
 				this.LoadingUtils.hideLoading();
+				console.log(this.$refs)
 				var min = '0' + parseInt(this.$refs.audios.currentTime / 60); //音频播放当前时间
 				var max = parseInt(this.$refs.audios.duration); //音频总时长
 				var sec = parseInt(this.$refs.audios.currentTime % 60);
@@ -88,6 +90,7 @@ export default {
 		},
 		//开始播放
 		gotoPlay(path, index, duration) {
+			this.index = index;
 			this.rangeValue = 0;
 			this.audioList.forEach((item,i)=>{
 				if(i == index){
@@ -106,20 +109,19 @@ export default {
 			})
 		},
 		//暂停-结束
-		stop() {
-			this.$refs.audios.pause();
-			this.audioList.forEach((item,i)=>{
-				item.isplay = false;
-				this.playflg = false; //播放中
-				this.url = item.record;
-				this.rangeValue = 0;
-			})
+		stop(index) {
+			 this.$refs.audios.pause();
+			 console.log(index)
+			 this.audioList[index].isplay = false
+			 this.playflg = false; //播放中
+			 this.rangeValue = 0;
+			 this.url = ''
 		},
 		onError(e) {
 			console.log('播放错误');
 		},
 		onEnded() {
-			this.stop()
+			this.stop(this.index)
 			console.log('播放结束');
 		},
 		changeEvent() {
