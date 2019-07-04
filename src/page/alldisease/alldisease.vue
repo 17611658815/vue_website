@@ -49,7 +49,7 @@
                           if(_item.son == undefined){
                             _item.son=[
                                 {
-                                    name: _item.name + "全科",
+                                    name: `${_item.name}全科`,
                                     id: _item.id
                                 }
                             ]

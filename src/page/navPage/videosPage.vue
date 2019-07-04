@@ -29,8 +29,9 @@
             }
         },
         created() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
+            console.log('1111')
+            // document.body.scrollTop = 0;
+            // document.documentElement.scrollTop = 0;
             // this.loadList()
         },
         methods: {

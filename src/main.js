@@ -50,6 +50,8 @@ if (process.env.NODE_ENV == 'development') {
 } else {
     Axios.defaults.baseURL = 'https://api.mfk.com/app/api/';
 }
+
+
 //全局注入
 Vue.config.productionTip = false
 Vue.prototype.$Api = Api;//定义全局变量(请求)

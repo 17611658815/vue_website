@@ -2,6 +2,7 @@
     <div class='audiosPage'>
         <van-list :finished="loading" @load="loadMore">
             <herder-title :title="title" :isback='true'></herder-title>
+         
             <div class='imgBox'>
                 <img src="@/assets/images/yp-banner.jpg" alt="">
             </div>

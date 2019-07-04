@@ -5,6 +5,7 @@
                 <mt-button @click="$router.go(-1)" icon="back" v-if='isback'></mt-button>
             </router-link>
         </mt-header>
+            <div style="height:45px"></div>
     </div>
 </template>
 
@@ -35,6 +36,6 @@
 
 <style scoped>
     .title{
-        margin-bottom: 90px;
+        /* margin-bottom: 90px; */
     }
 </style>

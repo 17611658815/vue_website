@@ -49,7 +49,7 @@
 		name:'audioDetails',
 		data() {
 			return {
-				audioObj:{
+				audioObj:{  //添加对应项 不然赋值会报错
 					yinpin:{},
 					doctor:{},
 					relevant:[]
@@ -205,6 +205,7 @@
 		justify-content: center;
 		background: #ffffff;
 		margin-bottom: 20px;
+		
 	}
 	.titleTxt{
 		width: 92%;
