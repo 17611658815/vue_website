@@ -63,6 +63,7 @@
 <style scoped lang="scss">
    
     .answersListpage{
+        width: 100%;
         background: #fff;
     }
     .answersContainer{

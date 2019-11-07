@@ -55,7 +55,7 @@
                     this.LogUtils.jsonLog(data)
                     this.LoadingUtils.hideLoading(); 
                 })
-             },
+            },
             //加载更多
             loadMore(){
                this.LogUtils.log('加载了！')

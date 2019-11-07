@@ -2,7 +2,7 @@
     <div class="title">
         <mt-header fixed :title="title">
             <router-link to="" slot="left">
-                <mt-button @click="$router.go(-1)" icon="back" v-if='isback'></mt-button>
+                <mt-button @click.native="$router.go(-1)" icon="back" v-if='isback'></mt-button>
             </router-link>
         </mt-header>
             <div style="height:45px"></div>
