@@ -11,7 +11,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': { //使用"/api"来代替
-        target: 'https://api.mfk.com/app/api', //源地址
+        target: 'https://api.mfk.com/', //源地址
         // target: 'http://guge.user.iguge.com/admin', //源地址
         changeOrigin: true, //改变源
         pathRewrite: {

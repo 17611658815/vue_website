@@ -7,49 +7,51 @@
             
         </div>
     <router-view></router-view>-->
-    <van-list :finished="loading" @load="loadMore">
-            <div class="swiperContainer">
-                <mt-swipe :speed='500' :auto="4000">
-                    <mt-swipe-item>
-                        <img src="http://img.39yst.com/uploads/mxb/position/20180723063657941.jpg">
-                    </mt-swipe-item>
-                    <mt-swipe-item>
-                        <img src="http://img.39yst.com/uploads/mxb/position/20180724034718366.jpg">
-                    </mt-swipe-item>
-                    <mt-swipe-item>
-                        <img src="http://img.39yst.com/uploads/mxb/position/20180704105059956.jpg">
-                    </mt-swipe-item>
-                </mt-swipe>
-            </div>
-            <div class='classNav'>
-                <div v-for='item in NavArray' :key="item.name">
-                    <router-link class='colorClass' :to="item.name">
-                        <img :src="item.icon" alt="">
-                        <p>{{item.text}}</p>
-                    </router-link>
-                </div>
-            </div>
-            <hotillness :inllnessList='inllnessList' :title='illnessTitle' :type='0' :isicon='false'></hotillness>
-            <video-module :videoList='videoList' :isSelf='false'></video-module>
-            
+    <!-- <van-list :finished="loading" @load="loadMore"> -->
+    <div class="swiperContainer">
+      <mt-swipe :speed="500" :auto="4000">
+        <mt-swipe-item>
+          <img src="http://img.39yst.com/uploads/mxb/position/20180723063657941.jpg" />
+        </mt-swipe-item>
+        <mt-swipe-item>
+          <img src="http://img.39yst.com/uploads/mxb/position/20180724034718366.jpg" />
+        </mt-swipe-item>
+        <mt-swipe-item>
+          <img src="http://img.39yst.com/uploads/mxb/position/20180704105059956.jpg" />
+        </mt-swipe-item>
+      </mt-swipe>
+    </div>
+    <div class="classNav">
+      <div v-for="item in NavArray" :key="item.name">
+        <router-link class="colorClass" :to="item.name">
+          <img :src="item.icon" alt />
+          <p>{{item.text}}</p>
+        </router-link>
+      </div>
+    </div>
+    <hotillness :inllnessList="inllnessList" :title="illnessTitle" :type="0" :isicon="false"></hotillness>
+    <!-- <video-module :videoList="videoList" :isSelf="false"></video-module> -->
+    <van-list v-model="loading" @load="loadMore()" :finished="on_off" finished-text="没有更多了">
+      <video-module :videoList="videoList" :isSelf="false"></video-module>
     </van-list>
-   
   </div>
 </template>
 
 <script>
+import { InfiniteScroll } from "mint-ui";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "home",
   data() {
     return {
-     chartUrl:"http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400",
+      chartUrl:
+        "http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400",
       data: [0, 1, 2],
       page: 1, //分页
       illnessTitle: "热门疾病",
       on_off: false, //下拉开关
       loading: false,
       videoList: [], //视频列表
-      inllnessList: [], //热门疾病
       NavArray: [
         {
           name: "/videosPage",
@@ -74,16 +76,22 @@ export default {
       ]
     };
   },
-  created() {
+  mounted() {
     this.getHotIllnessList();
+    this.$nextTick(function() {
+      console.log(this.illnessTitle, "nextTick"); //可以得到'changed'
+    });
   },
   components: {},
+  computed: {
+    ...mapState(["inllnessList"]) //调用vuex数据
+  },
   methods: {
+    ...mapActions(["getHotIllnessList"]), //调用vuex方法
     //获取主页视频
     getHomeVideo() {
       let params = new Object();
       params.page = this.page;
-      this.LoadingUtils.showLoading("加载中");
       this.$Api.getHomeVideoList(params).then(data => {
         if (data.list.length > 0) {
           data.list.forEach(val => {
@@ -92,8 +100,8 @@ export default {
           this.loading = false;
         } else {
           this.on_off = true; //分页开关
+           this.loading = false;
         }
-        this.LoadingUtils.hideLoading();
       });
     },
     //下拉加载
@@ -110,12 +118,13 @@ export default {
     scrollWindow() {
       window.scrollTo(100, 500);
     },
+
     //获取热门疾病
-    getHotIllnessList() {
-      this.$Api.getHotIllnessList().then(data => {
-        this.inllnessList = data.illness;
-      });
-    }
+    // getHotIllnessList() {
+    //   this.$Api.getHotIllnessList().then(data => {
+    //     this.inllnessList = data.illness;
+    //   });
+    // }
   }
 };
 </script>
@@ -161,22 +170,47 @@ export default {
   border: 0.013333rem solid $main_style_color;
 }
 
-
 #pageLayout {
-    display: flex;
-    background: yellow;
-    padding-left: 500px;
-    position: relative;
+  display: flex;
+  background: yellow;
+  padding-left: 500px;
+  position: relative;
 }
 iframe {
-    margin: 0;
-    border-style: none;
-    width: 100%;
-    height:100%;
-    position:  fixed;
-    top: 0;
-    left: 0;
-    transform: rotateZ(90deg);
+  margin: 0;
+  border-style: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: rotateZ(90deg);
+}
+
+.videoContainer {
+  width: 100%;
+  padding: 20px 0;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.videoContainer div {
+  width: 95%;
+}
+.video_cover img {
+  width: 100%;
+  height: 390px;
+}
+.video_title {
+  margin: 20px 0;
+  font-size: 32px;
+}
+.doctorInfo {
+  display: flex;
+  align-items: center;
 }
 </style>
 

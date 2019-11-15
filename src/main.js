@@ -3,12 +3,14 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+import store from './store/'
 //引入mint-ui组件
 import Mint from 'mint-ui';
 import 'mint-ui/lib/style.css'; 
 //全局修改mint-UI样式
 import '../src/assets/scss/my-mint_ui.scss';
 import '../src/assets/css/common.css';
+import VueScroller from 'vue-scroller'
 // import '../src/assets/scss/color.scss';
 // 设置eventbus传值
 window.eventBus = new Vue()
@@ -16,7 +18,7 @@ window.eventBus = new Vue()
 // vant-ui 全局组件
 import { PullRefresh,List, Collapse, CollapseItem,Button,Tab, Tabs} from 'vant';
 
-Vue.use(Collapse).use(CollapseItem);
+Vue.use(Collapse).use(CollapseItem).use(VueScroller);
 Vue.use(PullRefresh).use(List).use(Collapse).use(CollapseItem).use(Button).use(Tab).use(Tabs);
 Vue.use(Mint);
 // vant-ui
@@ -43,6 +45,7 @@ import {Api} from './net/Api.js'
 // 单位px转换rem
 import "lib-flexible/flexible.js"
 
+
 // 判断开发环境是否开启代理
 import Axios from 'axios';
 if (process.env.NODE_ENV == 'development') {
@@ -51,6 +54,9 @@ if (process.env.NODE_ENV == 'development') {
     Axios.defaults.baseURL = 'https://api.mfk.com/app/api/';
 }
 
+window.addEventListener('popstate',function(e){
+    router.isBack = true;
+},false)
 
 //全局注入
 Vue.config.productionTip = false
@@ -88,6 +94,7 @@ router.beforeEach((to, from, next) => {
 new Vue({
   el: '#app',
   router,
+  store,//挂在vuex
   components: { App },
   template: '<App/>'
 })

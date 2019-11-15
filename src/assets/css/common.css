@@ -66,3 +66,31 @@
     background: #53a2ef;
     transition: all .2s;
   }
+
+
+/* 视频列表 */
+.videoContainer {
+    width: 100%;
+    padding: 20px 0;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .videoContainer div {
+    width: 95%;
+  }
+  .video_cover img {
+    width: 100%;
+    height: 390px;
+  }
+  .video_title {
+    margin: 20px 0;
+    font-size: 32px;
+  }
+  .doctorInfo {
+    display: flex;
+    align-items: center;
+  }

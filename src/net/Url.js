@@ -1,6 +1,6 @@
 export default class Url {
     // target 源地址
-    static PATH() { return '/mfk_shipin_app2.php?type='}
+    static PATH() { return '/app/api/mfk_shipin_app2.php?type='}
     
 
     //获取主页列表

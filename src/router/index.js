@@ -23,7 +23,6 @@ import audioAskList from '@/page/audioAskList/audioAskList'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   base: __dirname,
   // linkActiveClass: 'active', // 更改激活状态的Class值
   routes: [
@@ -31,6 +30,7 @@ export default new Router({
       path: '/',
       name: 'home',
       component: home,
+      meta: { keepAlive: true }
       // children:[            
       //   {                                     //二级路由
       //     path:'/home/home_1',
@@ -49,35 +49,30 @@ export default new Router({
       //   }
 
       // ],
-      meta: { keepAlive: false } //页面会被缓存
     },
     //login
     {
       path: '/login',
       name: 'login',
       component: login,
-      meta: { keepAlive: false } //页面不会被缓存
     },
     //我的
     {
       path: '/information',
       name: 'information',
       component: information,
-      meta: { keepAlive: false }
     },
     //科普视频
     {
       path: '/videosPage',
       name: 'videosPage',
       component: videosPage,
-      meta: { keepAlive: false }
     },
     //名医问答
     {
       path: '/answersPage',
       name: 'answersPage',
       component: answersPage,
-      meta: { keepAlive: false }
     },
     //专家文章
     {
@@ -91,14 +86,12 @@ export default new Router({
       path: '/audiosPage',
       name: 'audiosPage',
       component: audiosPage,
-      meta: { keepAlive: false }
     },
     //音频详情
     {
       path: '/audioDetails',
       name: 'audioDetails',
       component: audioDetails,
-      meta: { keepAlive: true }
     },
     //视频详情
     {
@@ -112,14 +105,12 @@ export default new Router({
       path: '/upimages',
       name: 'upimages',
       component: upimages,
-      meta: { keepAlive: false }
     },
     //录音页面
     {
       path: '/recording',
       name: 'recording',
       component: recording,
-      meta: { keepAlive: false }
     },
     //疾病详情
     {
@@ -154,7 +145,6 @@ export default new Router({
       path: '/audioAskList',
       name: 'audioAskList',
       component: audioAskList,
-      meta: { keepAlive: false }
     }
   ],
   scrollBehavior(to, from, savedPosition) {
