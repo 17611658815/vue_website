@@ -1,16 +1,15 @@
 <template>
     <div class="articleDetailesPage">
-       
-            <!-- 页面标题 -->
-            <herder-title :title="articleObj.article.title" :isback='true'></herder-title>
-            <div class='headerContainer'>
-                <div class="titleTxt">
-                    <div>{{articleObj.article.title}}</div>
-                    <div>{{articleObj.article.created}}</div>
-                    <doctor-info :docinfo='articleObj.doctor'></doctor-info>
-                    <div class='txtMsg' v-html="content"></div>
-                </div>
+        <!-- 页面标题 -->
+        <herder-title :title="articleObj.article.title" :isback='true'></herder-title>
+        <div class='headerContainer'>
+            <div class="titleTxt">
+                <div>{{articleObj.article.title}}</div>
+                <div>{{articleObj.article.created}}</div>
+                <doctor-info :docinfo='articleObj.doctor'></doctor-info>
+                <div class='txtMsg' v-html="content"></div>
             </div>
+        </div>
         <van-list 
             v-model="loading" 
             @load="onReachBottom()" 

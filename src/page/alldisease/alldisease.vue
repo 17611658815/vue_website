@@ -103,6 +103,12 @@
         padding: 0.2rem 0;
         font-size: 0.28rem;
     }
+    .van-cell{
+        font-size: 0.36rem;
+    }
+    .collapse-item > span{
+         font-size: 0.32rem;
+    }
     .van-cell__left-icon, .van-cell__right-icon  {
         font-size: 0.513333rem !important;
     }
