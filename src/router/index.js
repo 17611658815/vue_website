@@ -74,18 +74,21 @@ export default new Router({
       path: '/answersPage',
       name: 'answersPage',
       component: answersPage,
+      meta: { keepAlive: true }
     },
     //专家文章
     {
       path: '/articlePage',
       name: 'articlePage',
       component: articlePage,
+      meta: { keepAlive: true }
     },
     //专家音频
     {
       path: '/audiosPage',
       name: 'audiosPage',
       component: audiosPage,
+      meta: { keepAlive: true }
     },
     //音频详情
     {

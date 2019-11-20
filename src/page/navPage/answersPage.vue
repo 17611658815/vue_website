@@ -31,7 +31,7 @@
                 answersList:[],
             }
         },
-        created () {
+        mounted () {
             this.loadList()
         },
         methods: {
@@ -65,8 +65,9 @@
                     this.LogUtils.jsonLog('没数据了....');
                 }else{
                     this.loading = true;
+                     this.page++;
                     this.loadList();
-                    this.page++;
+                   
                 }
             },
 

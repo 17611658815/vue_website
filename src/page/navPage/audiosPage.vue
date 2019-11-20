@@ -31,7 +31,7 @@
                 audioList:[],
             }
         },
-        created () {
+        mounted () {
             this.loadList()
         },
         methods: {
@@ -60,12 +60,13 @@
             //加载更多
             loadMore(){
                 if(this.on_off && !this.loading){
+                    this.loading = false;
                     return
                     this.LogUtils.jsonLog('没数据了....');
                 }else{
                     this.loading = true;
-                    this.loadList()
                     this.page++
+                    this.loadList()
                 }
             },
         },

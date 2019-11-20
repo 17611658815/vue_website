@@ -33,7 +33,7 @@ export default {
       videoList: []
     };
   },
-  created() {
+  mounted() {
     this.loadList()
   },
   methods: {
@@ -68,8 +68,8 @@ export default {
         this.LogUtils.jsonLog("没数据了....");
       } else {
         this.loading = true;
-        this.loadList();
         this.page++;
+        this.loadList();
       }
     }
   },
