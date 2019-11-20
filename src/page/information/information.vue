@@ -19,7 +19,9 @@
             <div class='personal_center_item' v-for='item in centeritem' :key="item.name">
                 <router-link class='personal_center_item' :to='{name:item.name}'>
                     <span><img :src="item.icon" alt=""></span>
-                    <div class='righText'><span>{{item.text}}</span><img src="@/assets/images/icon_right_gray.png"></div>
+                    <div class='righText'><span>{{item.text}}</span>
+                        <img src="@/assets/images/icon_right_gray.png">
+                    </div>
                 </router-link>
             </div>
         </div>
@@ -74,7 +76,6 @@
                     setTimeout(()=>{
                          this.$util.router_push(this,'login')
                     },1000)
-                   
                 },4000)
             }, 
         },

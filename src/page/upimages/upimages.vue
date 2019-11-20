@@ -2,7 +2,8 @@
     <div id="app">
         <herder-title :title="title" :isback='true'></herder-title>
         <div class='textareaBox'>
-            <textarea placeholder="详细描述您的问题或建议,我们将及时跟进解决。（建议添加相关问题或截图）" placeholder-class="phcolor" name="" id="" cols="30" rows="10"></textarea>
+            <textarea placeholder="详细描述您的问题或建议,我们将及时跟进解决。（建议添加相关问题或截图）" 
+                     placeholder-class="phcolor" name="" id="" cols="30" rows="10"></textarea>
         </div>
         <div class='addImg'>
             <image-upload

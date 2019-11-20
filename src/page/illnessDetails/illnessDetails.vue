@@ -1,6 +1,6 @@
 <template>
     <div class="illnessPage"> 
-        <van-list :finished="loading" @load="loadMore">
+       
             <herder-title :title="title" :isback='true'></herder-title>
             <!-- 标题 导航 定位部分 -->
             <div class='headerBox'>
@@ -16,8 +16,13 @@
                     </div>
                 </div>
             </div>
+        <van-list 
+             class='moduleContainer'
+            v-model="loading" 
+            @load="loadMore()" 
+            :finished="on_off"
+            finished-text="没有更多了">
             <!-- 模块 -->
-            <div class='moduleContainer'>
                 <!-- 概述 -->
                 <summarize v-if='currentTab == 0' :swatchtab="switchTab" :sliceIntroduction='sliceIntroduction' :sliceAttr='sliceAttr' :attr='attr' :Gdata='homeObj'></summarize>
                 <!-- 视频 -->
@@ -28,7 +33,6 @@
                 <article-module v-if='currentTab == 3' :articleList='Gdata[contype[currentTab]]' :isSelf='false'></article-module>
                 <!-- 音频 -->
                 <audio-module v-if='currentTab == 4' :audioList='Gdata[contype[currentTab]]' :isSelf='false'></audio-module>
-            </div>
         </van-list>
     </div>
 </template>
@@ -80,14 +84,13 @@
         activated(){
             this.LogUtils.log('执行了，activated')
             if(this.$route.query.data.id){ 
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop = 0;
                 this.loading = false,
                 this.illnessId = this.$route.query.data.id;
                 this.currentTab = this.$route.query.data.type;
                 this.title = this.$route.query.data.name;
                 this.Gdata[this.contype[this.currentTab]] = [];
                 this.switchTab(this.currentTab)
+                console.log(11111)
             }
         },
         watch: {
@@ -114,7 +117,12 @@
            */
         },
         created() {
-           
+           /*  console.log( this.$route.query)
+            this.illnessId = this.$route.query.data.id;
+            this.currentTab = this.$route.query.data.type;
+            this.title = this.$route.query.data.name;
+            this.getIllnessDetaile(this.currentTab,this.illnessId)
+            this.switchTab(this.currentTab) */
         },
         methods: {
              //获取疾病详情
@@ -139,6 +147,7 @@
                             this.loading = false
                         }else{
                             this.on_off = true //开启开关
+                            this.loading = false
                             this.LogUtils.log('没数据了..')
                         }
                     }
@@ -149,25 +158,25 @@
              },
             //tab切换
              switchTab(index){
-                 console.log('tab切换')
-                 this.currentTab = index;
-                 this.page = 1;//分页初始化
-                 this.on_off = false //关闭开关
-                 document.body.scrollTop = 0;
-                 document.documentElement.scrollTop = 0;
-                 this.Gdata[this.contype[this.currentTab]] = [];
-                 this.getIllnessDetaile(index,this.illnessId)
+                console.log('tab切换')
+                this.currentTab = index;
+                this.page = 1;//分页初始化
+                this.on_off =  false //关闭开关
+                this.Gdata[this.contype[this.currentTab]] = [];
+                this.getIllnessDetaile(index,this.illnessId)
+                console.log(22222)
+                
              },
             //触底加载
              loadMore(){
-                 this.LogUtils.log('触底了++')
-                 if(this.on_off || this.currentTab == 0){
+                if(this.on_off || this.currentTab == 0){
+                     this.loading = false
                     return
-                    this.LogUtils.jsonLog('没数据了....');
                 }else{
                     this.loading = true
                     this.page++
                     this.getIllnessDetaile(this.currentTab,this.illnessId)
+                      this.LogUtils.log('触底了++')
                 }
              },
             //点击更多
@@ -197,11 +206,9 @@
 
 <style scoped lang="scss">
     @import '@/assets/scss/color.scss';
-    // .illnessPage{
-    //     width: 100%;
-    // }
-    .van-list{
+    .illnessPage{
         width: 100%;
+        min-height: 100vh;
     }
     .headerBox{
         width: 100%;
@@ -237,6 +244,7 @@
         position: relative;
     }
     .moduleContainer{
+        height: 100%;
         margin-top: 260px;
     }
 </style>

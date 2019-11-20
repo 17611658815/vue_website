@@ -51,7 +51,7 @@ import Axios from 'axios';
 if (process.env.NODE_ENV == 'development') {
     Axios.defaults.baseURL = '/api';
 } else {
-    Axios.defaults.baseURL = 'https://api.mfk.com/app/api/';
+    Axios.defaults.baseURL = 'https://api.mfk.com/';
 }
 
 window.addEventListener('popstate',function(e){

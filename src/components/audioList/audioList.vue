@@ -1,6 +1,6 @@
 <template>
     <div class="audioPage" v-if='audioList.length>0'>
-       <div class='audioContainer' @click="goaudioDetails(item.id,item.title)" v-for='(item,index) in audioList' :key="item.id">
+       <div class='audioContainer' @click="goaudioDetails(item.id,item.title)" v-for='(item,index) in audioList' :key="index+item.id">
             <div class='recommendation' v-if='isSelf && index==0'>
                 相关音频
             </div>
@@ -31,9 +31,6 @@
                 <span class='doctor_hospital'>{{item.doctor.hospital}}</span>
             </div>
         </div>
-    </div>
-    <div class="audioPage" v-else>
-        没数据
     </div>
 </template>
 <script type="text/ecmascript-6">

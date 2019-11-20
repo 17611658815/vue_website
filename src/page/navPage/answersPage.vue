@@ -1,12 +1,16 @@
 <template>
     <div id='answerPages'>
-        <van-list :finished="loading" @load="loadMore">
             <herder-title :title="title" :isback='true'></herder-title>
             <div class='imgBox'>
                 <img src="@/assets/images/wd-banner.jpg" alt="">
             </div>
             <!-- 疾病列表 -->
             <hotillness :inllnessList='inllnessList' :title="illnessTitle" :type='2' :isicon='true'></hotillness>
+            <van-list 
+                v-model="loading" 
+                @load="loadMore()" 
+                :finished="on_off" 
+                finished-text="没有更多了">
             <!-- 问答列表 -->
             <answers-module :answersList='answersList'></answers-module>
         </van-list>
@@ -28,7 +32,7 @@
             }
         },
         created () {
-            // this.loadList()
+            this.loadList()
         },
         methods: {
             //获取主页视频
@@ -46,6 +50,7 @@
                         })
                         this.loading = false;
                     }else{
+                        this.loading = false;
                         this.on_off = true
                     }
                     this.LogUtils.jsonLog(data)
@@ -55,12 +60,13 @@
             //加载更多
             loadMore(){
                 if(this.on_off){
+                    this.loading = false;
                     return
                     this.LogUtils.jsonLog('没数据了....');
                 }else{
                     this.loading = true;
-                    this.loadList()
-                    this.page++
+                    this.loadList();
+                    this.page++;
                 }
             },
 

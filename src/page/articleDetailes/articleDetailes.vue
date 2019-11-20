@@ -1,6 +1,6 @@
 <template>
     <div class="articleDetailesPage">
-        <van-list :finished="loading" @load="onReachBottom">
+       
             <!-- 页面标题 -->
             <herder-title :title="articleObj.article.title" :isback='true'></herder-title>
             <div class='headerContainer'>
@@ -11,6 +11,11 @@
                     <div class='txtMsg' v-html="content"></div>
                 </div>
             </div>
+        <van-list 
+            v-model="loading" 
+            @load="onReachBottom()" 
+            :finished="on_off" 
+            finished-text="没有更多了">
             <article-module :articleList='articleObj.relevant' @changeIds="upPageid" :isSelf='true'></article-module>
         </van-list>
     </div>
@@ -54,7 +59,6 @@
                 this.articleObj.doctor = {};
                 this.articleObj.relevant = [];
                 this.getArticleDetailsList();
-
             },
             immediate: true
         },

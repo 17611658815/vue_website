@@ -1,6 +1,5 @@
 <template>
     <div class="answerpage">
-        <van-list :finished="loading" @load="onReachBottom">
         <!-- 页面标题 -->
         <herder-title :title="answerObj.ask.title" :isback='true'></herder-title>
         <div class='headerContainer'>
@@ -12,6 +11,7 @@
             <doctor-info :docinfo='answerObj.doctor'></doctor-info>
             <div class='headerContainer_answer'>{{answerObj.ask.answer}}</div>
         </div>
+         <van-list v-model="loading" @load="onReachBottom()" :finished="on_off" finished-text="没有更多了">
         <answers-module :answersList='answerObj.relevant' @changeIds="upPageid" :isSelf='true'></answers-module>
         <!-- <div class='bottomTost' v-if='on_off'>到底了~</div> -->
         </van-list>
@@ -93,6 +93,7 @@
                         })
                         this.loading = false;
                     }else{
+                        this.loading = false;
                         this.on_off = true
                     }
                     this.LoadingUtils.hideLoading();

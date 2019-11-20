@@ -6,6 +6,6 @@ import {
 export default {
     // 获取首页热门疾病
     [GET_HOTILLNESSLIST](state, data) {
-		state.inllnessList = data;
+		    state.inllnessList = data;
     },
 }

@@ -67,6 +67,7 @@ export default new Router({
       path: '/videosPage',
       name: 'videosPage',
       component: videosPage,
+      meta: { keepAlive: true }
     },
     //名医问答
     {
@@ -79,7 +80,6 @@ export default new Router({
       path: '/articlePage',
       name: 'articlePage',
       component: articlePage,
-      meta: { keepAlive: false }
     },
     //专家音频
     {

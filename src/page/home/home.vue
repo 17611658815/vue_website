@@ -1,13 +1,5 @@
 <template>
   <div class="homePage">
-    <!-- <div>
-            <router-link to='/home/home_1'><span>页面1</span></router-link>
-            <router-link to='/home/home_2'><span>页面2</span></router-link>
-            <router-link to='/home/home_3'><span>页面3</span></router-link>
-            
-        </div>
-    <router-view></router-view>-->
-    <!-- <van-list :finished="loading" @load="loadMore"> -->
     <div class="swiperContainer">
       <mt-swipe :speed="500" :auto="4000">
         <mt-swipe-item>
@@ -29,9 +21,16 @@
         </router-link>
       </div>
     </div>
-    <hotillness :inllnessList="inllnessList" :title="illnessTitle" :type="0" :isicon="false"></hotillness>
-    <!-- <video-module :videoList="videoList" :isSelf="false"></video-module> -->
-    <van-list v-model="loading" @load="loadMore()" :finished="on_off" finished-text="没有更多了">
+    <hotillness 
+      :inllnessList="inllnessList" 
+      :title="illnessTitle" 
+      :type="0" 
+      :isicon="false"></hotillness>
+    <van-list 
+      v-model="loading" 
+      @load="loadMore()" 
+      :finished="on_off" 
+      finished-text="没有更多了">
       <video-module :videoList="videoList" :isSelf="false"></video-module>
     </van-list>
   </div>
@@ -40,13 +39,11 @@
 <script>
 import { InfiniteScroll } from "mint-ui";
 import { mapState, mapActions } from "vuex";
+import wx from 'weixin-js-sdk'
 export default {
   name: "home",
   data() {
     return {
-      chartUrl:
-        "http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400",
-      data: [0, 1, 2],
       page: 1, //分页
       illnessTitle: "热门疾病",
       on_off: false, //下拉开关
@@ -76,10 +73,13 @@ export default {
       ]
     };
   },
+  created(){  
+    
+  },
   mounted() {
     this.getHotIllnessList();
     this.$nextTick(function() {
-      console.log(this.illnessTitle, "nextTick"); //可以得到'changed'
+
     });
   },
   components: {},
@@ -100,7 +100,7 @@ export default {
           this.loading = false;
         } else {
           this.on_off = true; //分页开关
-           this.loading = false;
+          this.loading = false;
         }
       });
     },
@@ -117,7 +117,7 @@ export default {
     },
     scrollWindow() {
       window.scrollTo(100, 500);
-    },
+    }
 
     //获取热门疾病
     // getHotIllnessList() {

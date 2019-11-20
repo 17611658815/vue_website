@@ -21,7 +21,8 @@
     "vue-pull-to": "^0.1.6",
     "vue-router": "^3.0.1",
     "vue-scroller": "^2.2.4",
-    "vuex": "^3.1.2"
+    "vuex": "^3.1.2",
+    "weixin-js-sdk": "^1.4.0-test"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
