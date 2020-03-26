@@ -1,6 +1,9 @@
 <template>
     <div class="answersListpage">
-        <div class='answersContainer' v-for='(item,index) in answersList' @click="goanswersDetails(item.id,item.title)" :key="item.id">
+        <div class='answersContainer' 
+            v-for='(item,index) in answersList' 
+            @click="goanswersDetails(item.id,item.title)" 
+            :key="item.id">
             <div class='recommendation' v-if='isSelf && index==0'>
                 相关问答
             </div>

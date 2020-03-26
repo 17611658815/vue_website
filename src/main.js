@@ -49,6 +49,7 @@ import "lib-flexible/flexible.js"
 // 判断开发环境是否开启代理
 import Axios from 'axios';
 if (process.env.NODE_ENV == 'development') {
+    console.log(process.env.NODE_ENV)
     Axios.defaults.baseURL = '/api';
 } else {
     Axios.defaults.baseURL = 'https://api.mfk.com/';
@@ -75,10 +76,10 @@ Vue.component('articleModule',articleModule)
 Vue.component('audioModule',audioModule)
 Vue.component('hotillness',hotillness)
 
-
+console.log(router.beforeEach,"min.js")
 router.beforeEach((to, from, next) => {
     var userInfo = window.localStorage.getItem('TokenID');//获取浏览器缓存的用户信息
-  if (!userInfo && to.name !== 'login') { // 判断是否已经登录且前往的页面不是登录页
+    if (!userInfo && to.name !== 'login') { // 判断是否已经登录且前往的页面不是登录页
         next({
             name: 'login'
         });
@@ -87,7 +88,7 @@ router.beforeEach((to, from, next) => {
             name:"home"
         });
     }else{
-      next();
+        next();
     }
 })
 /* eslint-disable no-new */

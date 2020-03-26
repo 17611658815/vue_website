@@ -13,14 +13,18 @@
 				</div>
 			</li>
 		</ul> -->
-        <van-collapse  @change='_isFold(item.id,index)' v-for="(item,index) in stairillnessList" :key="item.id" v-model="activeName" accordion>
+        <van-collapse  
+            @change='_isFold(item.id,index)' 
+            v-for="(item,index) in stairillnessList" 
+            :key="item.id" 
+            v-model="activeName" accordion>
             <van-collapse-item  :title-class="activeName == item.id ? 'active':'' " :title="item.name" :name="item.id">
                     <div class="collapse-item">
                         <span v-for="(item,index) in secondillnessList" @click="goillnessDetails(item.id,item.name)" :key="item.id">{{item.name}}</span>
                     </div>
             </van-collapse-item>
         </van-collapse>
-        </div>
+    </div>
 </template>
 <script type="text/ecmascript-6">
     export default {

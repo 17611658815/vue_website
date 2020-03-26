@@ -1,11 +1,12 @@
-/** 
-    title  @String 自定义标题；
-    isicon @Boolean 控制icon图片显示隐藏；
-    type   @Number 判断是从哪里点进的疾病详情 0 首页；1 视频；2 问答；3 文章；4 音频；
-    inllnessList @Array 热门疾病
-*/
+
 
 <template>
+    <!--
+        title  @String 自定义标题；
+        isicon @Boolean 控制icon图片显示隐藏；
+        type   @Number 判断是从哪里点进的疾病详情 0 首页；1 视频；2 问答；3 文章；4 音频；
+        inllnessList @Array 热门疾病
+    -->
     <!-- 热门疾病 -->
     <div class="inllness">
         <!-- <button @click="method1">显示传值</button> -->
@@ -49,10 +50,10 @@
             // 判断跳转选项
             goillnessDetails(type,id,name){
                 let data = new Object();
-                data.type = type;
-                data.id = id;
-                data.name = name
-                console.log(data)
+                    data.type = type;
+                    data.id = id;
+                    data.name = name
+                    console.log(data)
                 switch (type) {
                     case 0:
                         console.log('主页')

@@ -14,7 +14,7 @@
                 :max-count = 10
                 @chooseImages='bindtap_chooseImages'
                 />
-            <div  v-for="(image , i) in images"  class='imagesPic' :key="i">
+            <div v-for="(image , i) in images"  class='imagesPic' :key="i">
                 <div>
                     <img :src="image.src" alt="" @click="bingtap_preview(i)">
                     <span @click="bindtap_delete(i)">删除</span>
@@ -29,8 +29,7 @@
             v-model="index"
             :numIsShow="true"
             :deleteIsShow="true"
-            @delete="bindtap_delete"
-            />
+            @delete="bindtap_delete" />
         <div class="submit" @click="bindtap_upload">
                  上传
         </div>

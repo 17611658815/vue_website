@@ -1,6 +1,8 @@
 <template>
     <div class="articleListpage">
-         <div class='articleContainer' @click="goarticleDetails(item.id,item.title)" v-for='(item,index) in articleList' :key="item.id">
+         <div class='articleContainer' 
+            @click="goarticleDetails(item.id,item.title)" 
+            v-for='(item,index) in articleList' :key="item.id">
              <div class='recommendation' v-if='isSelf && index==0'>
                 相关文章
             </div>

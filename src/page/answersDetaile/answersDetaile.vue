@@ -48,8 +48,8 @@
                  * 初始化时数据
                  * */ 
                 console.log('监听')
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop = 0;
+                // document.body.scrollTop = 0;
+                // document.documentElement.scrollTop = 0;
                 this.page = 1;
                 this.on_off = false; 
                 this.answerObj.ask = {};
@@ -102,7 +102,7 @@
         },
         components: {
             'doctor-info':doctorInfo
-        }
+        },
     }
 </script>
 

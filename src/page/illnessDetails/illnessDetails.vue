@@ -130,7 +130,7 @@
                 let params = new Object();
                 params.id = id;
                 params.page = this.page;
-                this.LoadingUtils.showLoading('加载中');
+                // this.LoadingUtils.showLoading('加载中');
                 this.$Api.getIllnessDetaile(params,this.contype[currentTab]).then(data => {
                     //概述
                     if(this.currentTab==0){

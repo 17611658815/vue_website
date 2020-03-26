@@ -1,6 +1,6 @@
 <template>
   <div class="homePage">
-    <div class="swiperContainer">
+    <div class="swiperContainer">                                                  
       <mt-swipe :speed="500" :auto="4000">
         <mt-swipe-item>
           <img src="http://img.39yst.com/uploads/mxb/position/20180723063657941.jpg" />
@@ -19,7 +19,7 @@
           <img :src="item.icon" alt />
           <p>{{item.text}}</p>
         </router-link>
-      </div>
+      </div>  
     </div>
     <hotillness 
       :inllnessList="inllnessList" 
@@ -33,6 +33,12 @@
       finished-text="没有更多了">
       <video-module :videoList="videoList" :isSelf="false"></video-module>
     </van-list>
+    
+    <!-- <div  v-for='item in ruleForm1.tableData'>
+      <input type="text" v-model="item.weightCoefficient" name="" id="" > <span>{{item.num}}</span>
+    </div> -->
+    
+
   </div>
 </template>
 
@@ -44,7 +50,21 @@ export default {
   name: "home",
   data() {
     return {
-      page: 1, //分页
+     ruleForm1:{
+       maxScore:40,
+       tableData: [
+        {
+         weightCoefficient:0.2,
+         num:0
+        },
+        {
+         weightCoefficient:0.5,
+         num:0
+        },
+       ]
+      },
+      
+       page: 1, //分页
       illnessTitle: "热门疾病",
       on_off: false, //下拉开关
       loading: false,
@@ -70,8 +90,19 @@ export default {
           icon: "https://m.mfk.com/statics/images/icons4.png",
           text: "专家音频"
         }
-      ]
+      ] 
     };
+  },
+  watch:{
+    "ruleForm1.tableData": {
+        handler(newValue, oldValue) {
+　　　　　　for (let i = 0; i < newValue.length; i++) {
+              console.log(newValue)
+              newValue[i].num = newValue[i].weightCoefficient/1*this.ruleForm1.maxScore
+　　　　　　}
+　　　　},
+　　　　deep: true
+    }
   },
   created(){  
     
@@ -79,7 +110,6 @@ export default {
   mounted() {
     this.getHotIllnessList();
     this.$nextTick(function() {
-
     });
   },
   components: {},

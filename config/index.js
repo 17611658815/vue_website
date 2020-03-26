@@ -11,8 +11,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': { //使用"/api"来代替
-        target: 'https://api.mfk.com/', //源地址
-        // target: 'http://guge.user.iguge.com/admin', //源地址
+        target: 'https://api.mfk.com', //源地址
         changeOrigin: true, //改变源
         pathRewrite: {
           '^/api': '/' //路径重写
@@ -21,8 +20,8 @@ module.exports = {
     },
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
-    // host: '192.168.191.2', // can be overwritten by process.env.HOST
+    // host: 'localhost', // can be overwritten by process.env.HOST
+    host: '192.168.191.1', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,

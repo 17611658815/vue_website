@@ -38,7 +38,7 @@
             //获取主页视频
             loadList(){
                 let params = new Object();
-                params.page = this.page
+                params.page = this.page;
                 this.LoadingUtils.showLoading('加载中');
                 this.$Api.getDoctoranswers(params).then(data => {
                     if(data.illness){
@@ -62,12 +62,9 @@
                 if(this.on_off){
                     this.loading = false;
                     return
-                    this.LogUtils.jsonLog('没数据了....');
-                }else{
+                    this.LogUtils.jsonLog('没数据了....')
                     this.loading = true;
-                     this.page++;
                     this.loadList();
-                   
                 }
             },
 

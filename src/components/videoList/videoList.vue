@@ -5,8 +5,7 @@
         class="videoContainer"
         v-for="(item,index) in videoList"
         :key="index+item.id"
-        @click="goVideoDetails(item.id,item.title)"
-      >
+        @click="goVideoDetails(item.id,item.title)">
         <div class="recommendation" v-if="isSelf && index==0">相关视频</div>
         <div class="video_cover">
           <img :src="item.thumb" v-lazy="item.thumb" alt />
